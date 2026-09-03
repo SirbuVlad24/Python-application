@@ -61,20 +61,21 @@ The application is divided into three main layers:
 
 ## Installation
 
-Clone the repository:
+Clone the repository and enter the project directory:
 
 ```bash
 git clone <repository-url>
-cd <repository-folder>
+cd Python-application
 ```
 
-Create and activate a virtual environment.
+Create and activate a virtual environment. Using a virtual environment keeps the
+project dependencies separate from the global Python installation.
 
 ### Windows PowerShell
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 ```
 
 ### Linux/macOS
@@ -84,13 +85,38 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-Install the dependencies:
+Install the dependencies inside the activated virtual environment:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
+Run the tests:
+
+```bash
+python -m pytest
+```
+
+## SQLite Database
+
+The application uses SQLite through SQLAlchemy. The database file is created in
+the project directory as `requests.db`.
+
+To create the database tables manually:
+
+```bash
+python -c "from app.database import create_tables; create_tables()"
+```
+
+The repository tests use isolated temporary databases and do not modify the
+application database.
+
+An SQLite viewer extension for VS Code can be used to inspect the `requests`
+table and its saved request history.
+
 ## Running the Application
+
+After the API layer is implemented, start the application with:
 
 ```bash
 uvicorn app.main:app --reload
