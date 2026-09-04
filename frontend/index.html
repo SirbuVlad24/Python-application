@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator matematic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="calculator-card">
+            <div class="brand-row">
+                <div class="brand-icon">✦</div>
+                <div>
+                  
+                    <h1>Calculator matematic</h1>
+                    
+                </div>
+            </div>
+
+
+            <form id="calculator-form">
+                <label for="operation">Alege operația</label>
+                <select id="operation" name="operation">
+                    <option value="power">Putere</option>
+                    <option value="fibonacci">Fibonacci</option>
+                    <option value="factorial">Factorial</option>
+                </select>
+
+                <div id="power-fields" class="operation-fields">
+                    <div class="input-grid">
+                        <div>
+                            <label for="base">Bază</label>
+                            <input id="base" type="number" step="any" placeholder="2">
+                        </div>
+                        <div>
+                            <label for="exponent">Exponent</label>
+                            <input id="exponent" type="number" min="0" placeholder="10">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="number-fields" class="operation-fields hidden">
+                    <label id="number-label" for="number-input">Număr</label>
+                    <input id="number-input" type="number" min="0" step="1" placeholder="10">
+                </div>
+
+                <button class="primary-button" type="submit">
+                    <span>Calculează</span>
+                    <span class="button-arrow">→</span>
+                </button>
+            </form>
+
+            <div id="message" class="message hidden" role="alert"></div>
+
+            <section id="result-card" class="result-card hidden" aria-live="polite">
+                <div class="result-heading">
+                    <span>Rezultat</span>
+                    <span class="success-dot">●</span>
+                </div>
+                <div id="result-value" class="result-value">-</div>
+                <div id="result-meta" class="result-meta"></div>
+            </section>
+        </section>
+
+        <section class="history-card">
+            <div class="history-header">
+                <div>
+                    <h2>Istoricul cererilor</h2>
+                </div>
+               
+            </div>
+
+            <div id="history-empty" class="history-empty">
+                <div class="empty-icon">♡</div>
+                <p>Încă nu există cereri.</p>
+                <span>Rezultatele tale vor apărea aici.</span>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="history-table" class="hidden">
+                    <thead>
+                        <tr>
+                            <th>Operație</th>
+                            <th>Input</th>
+                            <th>Rezultat</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
