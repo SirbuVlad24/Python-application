@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-
+from fastapi.staticfiles import StaticFiles
 from app.api.routes import router
 from app.database import create_tables
-
+from fastapi.middleware.cors import CORSMiddleware
 
 # Create the database table when the application starts
 create_tables()
@@ -13,6 +13,16 @@ app = FastAPI(
     description="REST API for power, Fibonacci, and factorial calculations.",
     version="1.0.0",
 )
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Add all API endpoints
 app.include_router(router)
+app.mount(
+    "/",
+    StaticFiles(directory="frontend", html=True),
+    name="frontend",
+)
