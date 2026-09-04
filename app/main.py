@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi.staticfiles import StaticFiles
 from app.api.routes import router
 from app.database import create_tables
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,3 +21,8 @@ app.add_middleware(
 )
 # Add all API endpoints
 app.include_router(router)
+app.mount(
+    "/",
+    StaticFiles(directory="frontend", html=True),
+    name="frontend",
+)

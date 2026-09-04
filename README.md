@@ -18,6 +18,11 @@ The service supports:
 - SQLite
 - Pytest
 - JSON REST API
+- HTML5
+- CSS3
+- JavaScript
+- JSON REST API
+- Docker
 
 ## Project Structure
 
@@ -47,10 +52,16 @@ project-root/
 │   ├── repository/
 │   ├── api/
 │   └── integration/
+|
+├── frontend/
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
 ├── requirements.txt
 ├── README.md
 ├── Dockerfile
 └── .gitignore
+
 ```
 
 The application is divided into three main layers:
@@ -116,15 +127,53 @@ table and its saved request history.
 
 ## Running the Application
 
-After the API layer is implemented, start the application with:
+### Running the backend locally
 
-```bash
+Start the FastAPI backend with:
+
 uvicorn app.main:app --reload
-```
 
-The API will be available at `http://127.0.0.1:8000`.
+The API will be available at:
 
-Interactive documentation is available at `http://127.0.0.1:8000/docs`.
+http://127.0.0.1:8000
+
+Interactive API documentation is available at:
+
+http://127.0.0.1:8000/docs
+
+### Running the frontend locally
+
+In a second terminal, start the frontend:
+
+python -m http.server 5500 --directory frontend
+
+Open the frontend in your browser:
+
+http://127.0.0.1:5500
+
+The frontend communicates with the backend API running at:
+
+http://127.0.0.1:8000
+
+### Running the complete application with Docker
+
+Build the Docker image:
+
+docker build -t mathematical-operations-api .
+
+Run the container:
+
+docker run --rm -p 8000:8000 mathematical-operations-api
+
+The complete application, including the frontend, will be available at:
+
+http://127.0.0.1:8000
+
+The interactive API documentation is available at:
+
+http://127.0.0.1:8000/docs
+
+
 
 ## API Endpoints
 
@@ -225,7 +274,7 @@ Response:
 - `422 Unprocessable Entity` is returned for invalid input.
 - `500 Internal Server Error` is used for unexpected errors without exposing internal details.
 
-The exact limits are maintained in the business logic and must be confirmed by the team before final delivery.
+The exact limits are 1000.
 
 ## Data Persistence
 
@@ -260,8 +309,8 @@ The API, business logic, and data access layers are separated to make the applic
 - `feature/math-services` - mathematical functions, validation, and unit tests;
 - `feature/database-repository` - SQLite database and data access;
 - `feature/rest-api` - FastAPI endpoints and API tests;
-- `feature/integration-release` - integration, documentation, and final delivery.
-
+- `feature/integration-release` - integration, documentation, , Docker support and final delivery.
+- `feature/web-interface` - frontend web interface.
 ## Optional Bonuses
 
 Optional features may be implemented after all mandatory requirements are complete:
@@ -270,5 +319,5 @@ Optional features may be implemented after all mandatory requirements are comple
 - a simple web interface;
 - caching;
 - logging and monitoring;
-- simple authentication;
-- a serverless or messaging-system version.
+
+

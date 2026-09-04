@@ -8,7 +8,6 @@ const numberLabel = document.querySelector("#number-label");
 const numberInput = document.querySelector("#number-input");
 const resultCard = document.querySelector("#result-card");
 const resultValue = document.querySelector("#result-value");
-const resultMeta = document.querySelector("#result-meta");
 const message = document.querySelector("#message");
 const historyEmpty = document.querySelector("#history-empty");
 const historyTable = document.querySelector("#history-table");
@@ -72,7 +71,7 @@ function endpointFor(operation) {
 
 function showResult(data) {
     resultValue.textContent = data.result;
-    resultMeta.textContent = `Operație: ${data.operation} · ID: ${data.id}`;
+    
     resultCard.classList.remove("hidden");
 }
 
@@ -87,7 +86,11 @@ function renderHistory(history) {
 
     history.forEach((request) => {
         const row = document.createElement("tr");
-        const date = new Date(request.created_at).toLocaleString("ro-RO");
+        const createdAt = request.created_at.endsWith("Z")
+    ? request.created_at
+    : `${request.created_at}Z`;
+
+const date = new Date(createdAt).toLocaleString("ro-RO");
 
         row.innerHTML = `
             <td><span class="operation-pill">${request.operation}</span></td>
