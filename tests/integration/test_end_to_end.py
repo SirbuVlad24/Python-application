@@ -274,7 +274,9 @@ def test_unknown_endpoint_returns_not_found(integration_client):
 
 
 def test_wrong_http_method_returns_method_not_allowed(integration_client):
-    response = integration_client.get("/power")
+    response = integration_client.delete("/power")
+
+    assert response.status_code == 405
 
     assert response.status_code == 405
 def test_invalid_json_returns_a_client_error(integration_client):
